@@ -1,4 +1,3 @@
-
 import numpy as np
 import os
 from contextlib import asynccontextmanager
@@ -12,8 +11,8 @@ model = None
 async def lifespan(app: FastAPI):
     global model
     model = load_keras_model()
+    print(model.summary())
     yield
-    model = None
 
 app = FastAPI(lifespan=lifespan)
 
@@ -37,10 +36,11 @@ async def predict(file: UploadFile = File(...)):
     img = image.load_img(temp_file_path, target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0
 
     # The prediction
     prediction = model.predict(img_array)
+    print(f"Raw prediction: {prediction}")
+
     predicted_class_index = np.argmax(prediction, axis=1)[0]
     predicted_class_label = label_index[predicted_class_index]
     predicted_class_name = label_mapping[predicted_class_label]
