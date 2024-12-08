@@ -5,7 +5,7 @@ from tensorflow.keras.models import load_model
 
 MODEL_FILE = "model.keras"
 MODEL_GDRIVE_ID = "1qEI6UVtlVHUi9EmpAaIztk5SWJqk66KS"
-MD5_CHECKSUM = "122c7b5779cfe0acc44a3f59e44229ea"
+MD5_CHECKSUM = "7f2ee6a5a4b06705e76c85dee4b23adc"
 
 label_mapping = {
     "MEL": "Melanoma",
@@ -41,6 +41,3 @@ def load_keras_model():
         if not verify_md5(MODEL_FILE, MD5_CHECKSUM):
             raise ValueError("Downloaded model file is corrupted.")
     return load_model(MODEL_FILE)
-
-
-model = load_keras_model()

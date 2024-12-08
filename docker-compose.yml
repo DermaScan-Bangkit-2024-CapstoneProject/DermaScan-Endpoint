@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      UV_COMPILE_BYTECODE: 1
+      UV_LINK_MODE: copy
+    volumes:
+      - .:/app
+      - /app/.venv
+    command: ["granian", "--interface", "asgi", "main:app", "--host", "0.0.0.0"]

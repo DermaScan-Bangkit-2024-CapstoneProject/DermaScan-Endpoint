@@ -1,11 +1,21 @@
+
 import numpy as np
 import os
-from fastapi import FastAPI, UploadFile, File
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from tensorflow.keras.preprocessing import image
-from prediction import model, label_index, label_mapping, cancerous_classes
+from prediction import load_keras_model, label_index, label_mapping, cancerous_classes
 
-app = FastAPI()
+model = None
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global model
+    model = load_keras_model()
+    yield
+    model = None
+
+app = FastAPI(lifespan=lifespan)
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -13,6 +23,9 @@ async def predict(file: UploadFile = File(...)):
     Endpoint for predictions.
     Uses the uploaded file for making predictions.
     """
+    if file.content_type not in ["image/jpeg", "image/jpg", "image/png"]:
+        raise HTTPException(status_code=400, detail="Invalid file type. Only JPEG and PNG images are allowed.")
+
     contents = await file.read()
 
     # Save the file temporarily
