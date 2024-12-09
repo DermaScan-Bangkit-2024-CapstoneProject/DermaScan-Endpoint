@@ -38,8 +38,8 @@ env:
   PROJECT_ID: 'backend-services-443516' # TODO: update to your Google Cloud project ID
   REGION: 'southeast-asia2' # TODO: update to your region
   SERVICE: 'backend-services' # TODO: update to your service name
-  # WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub' # TODO: update to your workload identity provider
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub/providers/github-provider'
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/github/providers/my-repo' # TODO: update to your workload identity provider
+  # WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub/providers/github-provider'
 
 jobs:
   deploy:
@@ -62,6 +62,7 @@ jobs:
         uses: 'google-github-actions/auth@v2' # google-github-actions/auth@v2
         with:
           project_id: 'backend-services-443516'
+          service_account: 'model-dermascan-api@backend-services-443516.iam.gserviceaccount.com'
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
 
       # BEGIN - Docker auth and build
