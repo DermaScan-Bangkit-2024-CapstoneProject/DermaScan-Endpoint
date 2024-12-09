@@ -38,7 +38,8 @@ env:
   PROJECT_ID: 'backend-services-443516' 
   REGION: 'southeast-asia2'
   SERVICE: 'backend-services' 
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub' 
+  # WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub' 
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub/providers/github-provider'
 
 jobs:
   deploy:
