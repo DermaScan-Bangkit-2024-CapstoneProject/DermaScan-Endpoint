@@ -32,13 +32,13 @@ name: 'Build and Deploy to Cloud Run'
 on:
   push:
     branches:
-      - '"main"'
+      - 'main'
 
 env:
-  PROJECT_ID: 'backend-services-443516' # TODO: update to your Google Cloud project ID
-  REGION: 'southeast-asia2' # TODO: update to your region
-  SERVICE: 'backend-services' # TODO: update to your service name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub' # TODO: update to your workload identity provider
+  PROJECT_ID: 'backend-services-443516' 
+  REGION: 'southeast-asia2'
+  SERVICE: 'backend-services' 
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/235736354253/locations/global/workloadIdentityPools/GitHub' 
 
 jobs:
   deploy:
