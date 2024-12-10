@@ -1,4 +1,4 @@
-# DermaScan Cloud-Computing
+# DermaScan Machine Learning Endpoint
 
 ###### This repository contains the code for the DermaScan Model Endpoint.
 
