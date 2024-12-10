@@ -17,6 +17,8 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 ENTRYPOINT []
 
-EXPOSE 8000
+    EXPOSE 8080
+    CMD ["granian", "--interface", "asgi", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
-CMD ["granian", "--interface", "asgi", "main:app", "--host", "0.0.0.0"]
+# CMD ["granian", "--interface", "asgi", "main:app", "--host", "0.0.0.0"]
+

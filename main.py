@@ -16,6 +16,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+@app.get("/test")
+def hello_world():
+    return {"message": "Ini adalah endpoint model"}
+
+
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     """
